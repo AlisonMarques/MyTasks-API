@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MyTasks_API.Database;
 
 namespace MyTasks_API
 {
@@ -26,6 +28,12 @@ namespace MyTasks_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configurando o serviço de banco de dados
+            services.AddDbContext<MinhasTarefasContext>(op =>
+            {
+                op.UseSqlite("Data Source=Database//MinhasTarefas.db");
+            });
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
