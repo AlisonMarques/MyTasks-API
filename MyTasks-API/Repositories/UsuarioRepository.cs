@@ -12,7 +12,7 @@ namespace MyTasks_API.Repositories
         // injeção de dependencias
         private readonly UserManager<ApplicationUser> _userManager;
 
-        //aplicando a injençao de dependencias
+        //aplicando a injençao de dependencias através do construtor
         public UsuarioRepository(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
