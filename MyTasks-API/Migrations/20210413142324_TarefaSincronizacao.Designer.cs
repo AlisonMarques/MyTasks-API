@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyTasks_API.Database;
 
 namespace MyTasks_API.Migrations
 {
     [DbContext(typeof(MinhasTarefasContext))]
-    partial class MinhasTarefasContextModelSnapshot : ModelSnapshot
+    [Migration("20210413142324_TarefaSincronizacao")]
+    partial class TarefaSincronizacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
