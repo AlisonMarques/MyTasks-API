@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "5o0HVmdp/SEQw6fM+S9lxKFLSaIvdem5A3kyal0+XmC44r0nWe/OktO17qDb4dFLF6ebPfndhMV0ibww0gpBjA==",
+  "dgSpecHash": "aMweN8OWc2wW1td1mSSpb7hPa94iXLnM1cTHLJEbePfHM5WfCJe9qo2HVYGgq5yFcWiFSVZlha5moTNEDDiP/w==",
   "success": true,
   "projectFilePath": "/home/webdev/RiderProjects/MyTasks-API/MyTasks-API/MyTasks-API.csproj",
   "expectedPackageFiles": [
     "/home/webdev/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.aspnetcore.cryptography.internal/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.internal.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.keyderivation.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/6.0.0-preview.3.21201.13/microsoft.aspnetcore.identity.entityframeworkcore.6.0.0-preview.3.21201.13.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.data.sqlite.core/6.0.0-preview.3.21201.2/microsoft.data.sqlite.core.6.0.0-preview.3.21201.2.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.entityframeworkcore/6.0.0-preview.3.21201.2/microsoft.entityframeworkcore.6.0.0-preview.3.21201.2.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.0-preview.3.21201.2/microsoft.entityframeworkcore.abstractions.6.0.0-preview.3.21201.2.nupkg.sha512",
@@ -21,6 +24,8 @@
     "/home/webdev/.nuget/packages/microsoft.extensions.dependencyinjection/6.0.0-preview.3.21201.4/microsoft.extensions.dependencyinjection.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.dependencyinjection.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.dependencymodel/6.0.0-preview.3.21201.4/microsoft.extensions.dependencymodel.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.extensions.identity.core/6.0.0-preview.3.21201.13/microsoft.extensions.identity.core.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.extensions.identity.stores/6.0.0-preview.3.21201.13/microsoft.extensions.identity.stores.6.0.0-preview.3.21201.13.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.logging/6.0.0-preview.3.21201.4/microsoft.extensions.logging.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.logging.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.options/6.0.0-preview.3.21201.4/microsoft.extensions.options.6.0.0-preview.3.21201.4.nupkg.sha512",
