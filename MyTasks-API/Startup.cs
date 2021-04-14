@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyTasks_API.Database;
+using MyTasks_API.Repositories;
+using MyTasks_API.Repositories.Contracts;
 
 namespace MyTasks_API
 {
@@ -39,6 +41,11 @@ namespace MyTasks_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MyTasks_API", Version = "v1"});
             });
+            
+            // Configurando a injeção de dependencias dos repositories
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ITarefaRepository, TarefaRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
