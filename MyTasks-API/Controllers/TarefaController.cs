@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyTasks_API.Models;
@@ -7,8 +8,8 @@ using MyTasks_API.Repositories.Contracts;
 
 namespace MyTasks_API.Controllers
 {
-    [Route("api/[controller")]
     [ApiController]
+    [Route("api/[controller]")]
     public class TarefaController : ControllerBase
     {
         //Dependencias para serem injetadas
@@ -22,11 +23,17 @@ namespace MyTasks_API.Controllers
             _userManager = userManager;
         }
         
+        //Está dizendo que pra ter acesso a essa funçã, o usuário deve estar logado
+        [Authorize]
+        [HttpPost("sincronizar")]
         public ActionResult Sincronizar([FromBody]List<Tarefa> tarefas)
         {
             return Ok(_tarefaRepository.Sincronizacao(tarefas));
         }
-
+        
+        //Está dizendo que pra ter acesso a essa funçã, o usuário deve estar logado
+        [Authorize]
+        [HttpGet("restaurar")]
         public ActionResult Restaurar(DateTime data)
         {
             // Pegando qual usuário está logado

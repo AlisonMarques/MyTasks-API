@@ -10,6 +10,6 @@ namespace MyTasks_API.Repositories.Contracts
         List<Tarefa> Sincronizacao(List<Tarefa> tarefas);
         
         //recupera todas as tarefas
-        List<Tarefa> Restauracao(ApplicationUser usuario, DateTime dataUltimaSincronizacao);
+        List<Tarefa> Restauracao(ApplicationUser usuario, DateTime? dataUltimaSincronizacao);
     }
 }
