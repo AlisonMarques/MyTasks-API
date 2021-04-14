@@ -56,6 +56,19 @@ namespace MyTasks_API
 
             // Configuração do identity para usar como serviço
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<MinhasTarefasContext>();
+            
+            // Configurando para API retornar ao usuário a mensagem 401 que é quando o usuário não está logado
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    //enviando a mensagem para o usuário
+                    context.Response.StatusCode = 401;
+                    // Retornando para api que a tarefa foi completada
+                    return Task.CompletedTask;
+
+                };
+            });
 
             services.AddMvc().AddNewtonsoftJson(opt =>
             {

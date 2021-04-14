@@ -28,7 +28,7 @@ namespace MyTasks_API.Repositories
                 query.Where(a => a.Criado >= dataUltimaSincronizacao || a.Atualizado >= dataUltimaSincronizacao);
             }
 
-            return query.ToList<Tarefa>();
+            return query.ToList();
         }
         
         public List<Tarefa> Sincronizacao(List<Tarefa> tarefas)
