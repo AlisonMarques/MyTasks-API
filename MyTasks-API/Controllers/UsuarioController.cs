@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MyTasks_API.Models;
 using MyTasks_API.Repositories.Contracts;
 
 namespace MyTasks_API.Controllers
-{
-    [Route("api/[controller]")]
+{    
     [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         //Dependencias para serem injetadas
@@ -25,6 +26,7 @@ namespace MyTasks_API.Controllers
             _userManager = userManager;
         }
 
+        [HttpPost("login")]
         public ActionResult Login([FromBody] UsuarioDTO usuarioDTO)
         {
             ModelState.Remove("Nome");
@@ -47,8 +49,10 @@ namespace MyTasks_API.Controllers
             return NotFound("Usuário não encontrado!");
         }
 
+        [HttpPost("")]
         public ActionResult Cadastrar([FromBody] UsuarioDTO usuarioDTO)
         {
+            // se o usuário  nao for válido
             if (!ModelState.IsValid)
             {
                 return UnprocessableEntity(ModelState);
@@ -57,6 +61,7 @@ namespace MyTasks_API.Controllers
             ApplicationUser usuario = new ApplicationUser();
             
             usuario.FullName = usuarioDTO.Nome;
+            usuario.UserName = usuarioDTO.Email;
             usuario.Email = usuarioDTO.Email;
             // recebendo os dados para gerar o cadastro e criando o usuário.
             var resultado = _userManager.CreateAsync(usuario, usuarioDTO.Senha).Result;

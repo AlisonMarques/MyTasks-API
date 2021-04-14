@@ -18,7 +18,7 @@ namespace MyTasks_API.Repositories
             _banco = banco;
         }
         
-        public List<Tarefa> Restauracao(ApplicationUser usuario, DateTime dataUltimaSincronizacao)
+        public List<Tarefa> Restauracao(ApplicationUser usuario, DateTime? dataUltimaSincronizacao)
         {
             var query = _banco.Tarefas.Where(a => a.UsuarioId == usuario.Id).AsQueryable();
             
@@ -35,8 +35,9 @@ namespace MyTasks_API.Repositories
         {
             #region Cadastrar novos registros
 
-            var tarefasNovas = tarefas.Where(a => a.IdTarefaApi == 0);
-
+            var tarefasNovas = tarefas.Where(a => a.IdTarefaApi == 0).ToList();
+            var tarefasExcluidasAtualizadas = tarefas.Where(a => a.IdTarefaApi != 0).ToList();
+            
             if (tarefasNovas.Count() > 0)
             {
                 //Enquanto tarefasNovas for maior que 0, o foreach vai percorrer tarefasNovas
@@ -48,12 +49,10 @@ namespace MyTasks_API.Repositories
             }
 
             #endregion Cadastrar novos registros
-
+            
 
             #region Atualização de Registro (Excluído)
-            
-            var tarefasExcluidasAtualizadas = tarefas.Where(a => a.IdTarefaApi == 0);
-           
+
             if (tarefasExcluidasAtualizadas.Count() > 0)
             {
                 //Enquanto tarefasExcluidasAtualizadas for maior que 0, o foreach vai percorrer tarefasExcluidasAtualizadas

@@ -6,6 +6,7 @@ namespace MyTasks_API.Models
 {
     public class Tarefa
     {
+        [Key]
         //Id da tarefa no banco da Aplicação
         public int IdTarefaApi { get; set; }
 

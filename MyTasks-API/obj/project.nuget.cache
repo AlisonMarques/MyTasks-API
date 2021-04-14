@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aMweN8OWc2wW1td1mSSpb7hPa94iXLnM1cTHLJEbePfHM5WfCJe9qo2HVYGgq5yFcWiFSVZlha5moTNEDDiP/w==",
+  "dgSpecHash": "YKXY3jISjr67DtYy3ESCp8NUMAiD/czw02McydalXdXd29WFneciSZAb+lMOTKJEDQQ0wno0fQKU7nH9OEI1zQ==",
   "success": true,
   "projectFilePath": "/home/webdev/RiderProjects/MyTasks-API/MyTasks-API/MyTasks-API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "/home/webdev/.nuget/packages/microsoft.aspnetcore.cryptography.internal/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.internal.6.0.0-preview.3.21201.13.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.keyderivation.6.0.0-preview.3.21201.13.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/6.0.0-preview.3.21201.13/microsoft.aspnetcore.identity.entityframeworkcore.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.aspnetcore.jsonpatch/5.0.5/microsoft.aspnetcore.jsonpatch.5.0.5.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/5.0.5/microsoft.aspnetcore.mvc.newtonsoftjson.5.0.5.nupkg.sha512",
+    "/home/webdev/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.data.sqlite.core/6.0.0-preview.3.21201.2/microsoft.data.sqlite.core.6.0.0-preview.3.21201.2.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.entityframeworkcore/6.0.0-preview.3.21201.2/microsoft.entityframeworkcore.6.0.0-preview.3.21201.2.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.0-preview.3.21201.2/microsoft.entityframeworkcore.abstractions.6.0.0-preview.3.21201.2.nupkg.sha512",
@@ -31,6 +34,8 @@
     "/home/webdev/.nuget/packages/microsoft.extensions.options/6.0.0-preview.3.21201.4/microsoft.extensions.options.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.extensions.primitives/6.0.0-preview.3.21201.4/microsoft.extensions.primitives.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/home/webdev/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/webdev/.nuget/packages/newtonsoft.json/12.0.2/newtonsoft.json.12.0.2.nupkg.sha512",
+    "/home/webdev/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "/home/webdev/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.5-pre20210119130047/sqlitepclraw.bundle_e_sqlite3.2.0.5-pre20210119130047.nupkg.sha512",
     "/home/webdev/.nuget/packages/sqlitepclraw.core/2.0.5-pre20210119130047/sqlitepclraw.core.2.0.5-pre20210119130047.nupkg.sha512",
     "/home/webdev/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.5-pre20210119130047/sqlitepclraw.lib.e_sqlite3.2.0.5-pre20210119130047.nupkg.sha512",
