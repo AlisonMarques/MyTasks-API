@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,13 +18,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyTasks_API.Database;
-using MyTasks_API.Models;
-using MyTasks_API.Repositories;
-using MyTasks_API.Repositories.Contracts;
+using MyTasks_API.V1.Models;
+using MyTasks_API.V1.Repositories;
+using MyTasks_API.V1.Repositories.Contracts;
+using MyTasks_API.V1.Helpers.Swagger;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MyTasks_API
 {
@@ -48,10 +53,6 @@ namespace MyTasks_API
             });
             
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "MyTasks_API", Version = "v1"});
-            });
 
             // Configurando a injeção de dependencias dos repositories
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -106,6 +107,7 @@ namespace MyTasks_API
                 };
             });
             
+            services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddMvc(config =>
             {
                 // qnd colocar um formato nao suportado, vai retornar um erro 406
@@ -119,6 +121,71 @@ namespace MyTasks_API
             {
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            
+                        
+            //controle de versionamento
+            services.AddApiVersioning(cfg =>
+            {
+                // essa config gera o headers indicando quais versões a api suporta
+                cfg.ReportApiVersions = true;
+
+                //cfg.ApiVersionReader = new HeaderApiVersionReader("api-version");
+                
+                cfg.AssumeDefaultVersionWhenUnspecified = true;
+                cfg.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1,0);
+            });
+            services.AddSwaggerGen(cfg =>
+            {
+                cfg.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Description = "Adicione o Json Web Token(JWT) para autenticar",
+                    Scheme = "Bearer"
+                });
+
+                cfg.AddSecurityRequirement(new OpenApiSecurityRequirement{ 
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference{
+                                Id = "Bearer", //The name of the previously defined security scheme.
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },new List<string>()
+                    }
+                });
+                //resolvendo o problema de conflitos com as rotas
+                cfg.ResolveConflictingActions(apiDescription => apiDescription.First());
+               
+                // definindo no swagger quantas versões a API possui
+                cfg.SwaggerDoc("v1.0", new OpenApiInfo()
+                {
+                    Title = "MyTasks API - V1.0",
+                    Version = "V1.0"
+                });
+                
+                // Configuração para subir os comentários do controller para o Swagger
+                var caminhoProjeto = PlatformServices.Default.Application.ApplicationBasePath;
+                var nomeProjeto = $"{PlatformServices.Default.Application.ApplicationName}.xml";
+                var caminhoArquivoXmlComentario = Path.Combine(caminhoProjeto, nomeProjeto);
+                cfg.IncludeXmlComments(caminhoArquivoXmlComentario);
+
+                cfg.DocInclusionPredicate((docName, apiDesc) =>
+                {
+                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo)) return false;
+
+                    var versions = methodInfo.DeclaringType
+                        .GetCustomAttributes(true)
+                        .OfType<ApiVersionAttribute>()
+                        .SelectMany(attr => attr.Versions);
+
+                    return versions.Any(v => $"v{v.ToString()}" == docName);
+
+                });
+                services.AddMvc(cfg => cfg.Conventions.Add
+                    (new ApiExplorerGroupPerVersionConvention()));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -127,20 +194,23 @@ namespace MyTasks_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyTasks_API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "MyTasks_API v1"));
             }
-
             app.UseAuthentication();
             app.UseStatusCodePages();
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
+            //app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseMvc();
+            app.UseSwagger();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            // Ativando middlewares para o uso do Swagger
+            app.UseSwaggerUI(cfg =>
+            {
+                cfg.SwaggerEndpoint("/swagger/v1.0/swagger.json", "MyTasks API - V1.0");
+                cfg.RoutePrefix = String.Empty;
+            });
         }
     }
 }

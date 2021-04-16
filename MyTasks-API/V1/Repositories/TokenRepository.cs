@@ -1,9 +1,9 @@
 using System.Linq;
 using MyTasks_API.Database;
-using MyTasks_API.Models;
-using MyTasks_API.Repositories.Contracts;
+using MyTasks_API.V1.Models;
+using MyTasks_API.V1.Repositories.Contracts;
 
-namespace MyTasks_API.Repositories
+namespace MyTasks_API.V1.Repositories
 {
     public class TokenRepository : ITokenRepository
     {

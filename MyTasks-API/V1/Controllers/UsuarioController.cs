@@ -8,13 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using MyTasks_API.Models;
-using MyTasks_API.Repositories.Contracts;
+using MyTasks_API.V1.Models;
+using MyTasks_API.V1.Repositories.Contracts;
 
-namespace MyTasks_API.Controllers
+namespace MyTasks_API.V1.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
+    [ApiVersion("1.0")]
     public class UsuarioController : ControllerBase
     {
         //Dependencias para serem injetadas
@@ -117,7 +118,7 @@ namespace MyTasks_API.Controllers
         }
 
         //gerando token jwt
-        protected TokenDto BuildToken(ApplicationUser usuario)
+        private TokenDto BuildToken(ApplicationUser usuario)
         {
             var claims = new[]
             {
