@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyTasks_API.Database;
 using MyTasks_API.Models;
@@ -39,9 +43,9 @@ namespace MyTasks_API
             // configurando o serviço de banco de dados
             services.AddDbContext<MinhasTarefasContext>(op =>
             {
-                op.UseSqlite("Data Source=Database//MinhasTarefas.db");
+                op.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-
+            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -53,10 +57,43 @@ namespace MyTasks_API
             // Configurando a injeção de dependencias dos repositories
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITarefaRepository, TarefaRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            // Para o controller reconhecer
+            services.AddSingleton<IConfiguration>(Configuration);
 
             // Configuração do identity para usar como serviço
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<MinhasTarefasContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<MinhasTarefasContext>()
+                //habilitando o uso de tokens no identity
+                .AddDefaultTokenProviders();
             
+            
+            // config forma de autenticação para trabalhar com o JWT ao inves dos cookies
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
+            // configurando o Authorization para receber as configurações do Jwt feito acima
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build()
+                );
+            });
+
             // Configurando para API retornar ao usuário a mensagem 401 que é quando o usuário não está logado
             services.ConfigureApplicationCookie(options =>
             {

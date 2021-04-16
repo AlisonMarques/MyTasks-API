@@ -17,8 +17,14 @@ namespace MyTasks_API.Repositories
         {
             _userManager = userManager;
         }
-        
-        
+
+
+        //obter usuario pelo id
+        public ApplicationUser ObterId(string id)
+        {
+           return _userManager.FindByIdAsync(id).Result;
+        }
+
         public ApplicationUser Sigin(string email, string senha)
         {
             // buscando um usuário com o mesmo email
