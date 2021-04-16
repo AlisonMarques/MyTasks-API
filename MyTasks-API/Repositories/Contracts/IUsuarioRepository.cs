@@ -7,6 +7,8 @@ namespace MyTasks_API.Repositories.Contracts
         // métodos do usuário
         void Cadastrar(ApplicationUser usuario, string senha);
 
+        ApplicationUser ObterId(string id);
+
         ApplicationUser Sigin(string email, string senha);
     }
 }
