@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyTasks_API.Models
+namespace MyTasks_API.V1.Models
 {
     public class Tarefa
     {

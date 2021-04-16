@@ -83,3 +83,6 @@
 /home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
 /home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.Versioning.dll
+/home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/MyTasks-API.xml
+/home/webdev/RiderProjects/MyTasks-API/MyTasks-API/bin/Debug/net5.0/Microsoft.Extensions.PlatformAbstractions.dll

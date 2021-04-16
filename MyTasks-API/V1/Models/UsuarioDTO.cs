@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MyTasks_API.Models
+namespace MyTasks_API.V1.Models
 {
     // Essa classe nao vai pro banco de dados, apenas vai receber as informações
     public class UsuarioDTO

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MyTasks_API.Models;
-using MyTasks_API.Repositories.Contracts;
+using MyTasks_API.V1.Models;
+using MyTasks_API.V1.Repositories.Contracts;
 
-namespace MyTasks_API.Controllers
-{
-    [ApiController]
+namespace MyTasks_API.V1.Controllers
+{    
     [Route("api/[controller]")]
+    [ApiController]
+    [ApiVersion("1.0")]
     public class TarefaController : ControllerBase
     {
         //Dependencias para serem injetadas

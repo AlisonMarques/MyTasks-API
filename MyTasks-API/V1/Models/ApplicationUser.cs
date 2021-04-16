@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace MyTasks_API.Models
+namespace MyTasks_API.V1.Models
 {
     //essa vai ser a classe que vai para o banco de dados
     public class ApplicationUser : IdentityUser

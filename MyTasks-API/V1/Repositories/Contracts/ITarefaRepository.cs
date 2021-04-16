@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using MyTasks_API.Models;
+using MyTasks_API.V1.Models;
 
-namespace MyTasks_API.Repositories.Contracts
+namespace MyTasks_API.V1.Repositories.Contracts
 {
     public interface ITarefaRepository
     {
