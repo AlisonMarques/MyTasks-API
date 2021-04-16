@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,8 +52,6 @@ namespace MyTasks_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MyTasks_API", Version = "v1"});
             });
-
-            services.AddMvc();
 
             // Configurando a injeção de dependencias dos repositories
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -105,6 +104,15 @@ namespace MyTasks_API
                     return Task.CompletedTask;
 
                 };
+            });
+            
+            services.AddMvc(config =>
+            {
+                // qnd colocar um formato nao suportado, vai retornar um erro 406
+                config.ReturnHttpNotAcceptable = true;
+                // adicionando suporte ao xml na entrada e na saida
+                config.InputFormatters.Add(new XmlSerializerInputFormatter(config));
+                config.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
 
             services.AddMvc().AddNewtonsoftJson(opt =>
